@@ -1,0 +1,91 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 6257ec5d3253b3ede7062490e5639ee40e83db403d9481fba91eb14a92942c66
+
+name:           HBookRecon
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/HBookRecon#readme>
+homepage:       https://github.com/githubuser/HBookRecon#readme
+bug-reports:    https://github.com/githubuser/HBookRecon/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/HBookRecon
+
+library
+  exposed-modules:
+      Internal.Options
+      Internal.Types
+      Options.Options
+      Printer.Printer
+      Recon
+      Search.BookLinks
+      Search.GenreLinks
+      Search.SearchRecon
+      Search.ShelfLinks
+  other-modules:
+      Paths_HBookRecon
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , boxes
+    , bytestring
+    , http-conduit
+    , optparse-applicative
+    , parallel-io
+    , tagsoup
+    , word8
+  default-language: Haskell2010
+
+executable bookrecon
+  main-is: Main.hs
+  other-modules:
+      Paths_HBookRecon
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HBookRecon
+    , base >=4.7 && <5
+    , boxes
+    , bytestring
+    , http-conduit
+    , optparse-applicative
+    , parallel-io
+    , tagsoup
+    , word8
+  default-language: Haskell2010
+
+test-suite HBookRecon-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_HBookRecon
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HBookRecon
+    , base >=4.7 && <5
+    , boxes
+    , bytestring
+    , http-conduit
+    , optparse-applicative
+    , parallel-io
+    , tagsoup
+    , word8
+  default-language: Haskell2010
