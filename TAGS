@@ -1,0 +1,102 @@
+
+./app/Main.hs,37
+module Main Main0,1
+main main4,5
+
+./Setup.hs,15
+main main1,2
+
+./test/Spec.hs,15
+main main3,4
+
+./src/Search/ShelfLinks.hs,201
+module Search.ShelfLinksSearch.ShelfLinks4,5
+bookLinkCheck bookLinkCheck28,29
+filterEditionLinks filterEditionLinks31,32
+fixUpShelfLinks fixUpShelfLinks37,38
+getShelfLinks getShelfLinks46,47
+
+./src/Search/SearchRecon.hs,377
+module Search.SearchRecon Search.SearchRecon3,4
+type From From28,29
+type To To29,30
+subset subset31,32
+properSubset properSubset34,35
+addBaseLink addBaseLink37,38
+inGenresStrict inGenresStrict40,41
+inGenresUnStrict inGenresUnStrict44,45
+recon' recon'48,49
+bookLinkToName bookLinkToName73,74
+reconStrict reconStrict77,78
+reconUnStrict reconUnStrict81,82
+
+./src/Search/GenreLinks.hs,203
+module Search.GenreLinksSearch.GenreLinks4,5
+toLowerByteString toLowerByteString25,26
+genreLinkCheck genreLinkCheck28,29
+filterGenreLinks filterGenreLinks31,32
+getGenreLinks getGenreLinks36,37
+
+./src/Search/BookLinks.hs,341
+module Search.BookLinksSearch.BookLinks4,5
+bookLinkCheck bookLinkCheck22,23
+filterBookLinks filterBookLinks25,26
+fixUpBookLinks fixUpBookLinks31,32
+getBookLinks getBookLinks34,35
+bookTitleCheck bookTitleCheck40,41
+filterBookTitles filterBookTitles43,44
+fixUpBookTitles fixUpBookTitles46,47
+getBookTitles getBookTitles49,50
+
+./src/Options/Options.hs,300
+module Options.OptionsOptions.Options2,3
+linkParser linkParser12,13
+fromParser fromParser16,17
+toParser toParser20,21
+strictnessParser strictnessParser24,25
+genresParser genresParser30,31
+parseSearchOptions parseSearchOptions34,35
+execSearchOptionsParser execSearchOptionsParser43,44
+
+./src/Printer/Printer.hs,397
+module Printer.PrinterPrinter.Printer1,2
+getBookURL getBookURL26,27
+getBookTitle getBookTitle29,30
+getTop5BookGenres getTop5BookGenres32,33
+getMatchedGenres getMatchedGenres35,36
+fromLazyByteStringToString fromLazyByteStringToString39,40
+boxText boxText42,43
+breaker breaker45,46
+breaker50 breaker5048,49
+boxBookInfo boxBookInfo51,52
+printBookInfoList printBookInfoList68,69
+
+./src/Internal/Options.hs,439
+module Internal.Options Internal.Options2,3
+type Genre Genre6,7
+data SearchOptions SearchOptions8,9
+data SearchOptions = SearchOptions SearchOptions8,9
+data SearchOptions = SearchOptions { link link8,9
+                                   , from from9,10
+                                   , to to10,11
+                                   , strictness strictness11,12
+                                   , genres genres12,13
+
+./src/Internal/Types.hs,313
+module Internal.Types Internal.Types2,3
+type Link Link6,7
+type Genre Genre8,9
+data BookInfo BookInfo10,11
+data BookInfo = BookInfo BookInfo10,11
+data BookInfo = BookInfo { bookTitle bookTitle10,11
+                         , bookURL bookURL11,12
+                         , bookGenre bookGenre12,13
+
+./src/Recon.hs,179
+module ReconRecon2,3
+safeFrom safeFrom19,20
+safeTo safeTo22,23
+safeLink safeLink25,26
+safeGenres safeGenres28,29
+safeStrictness safeStrictness31,32
+recon recon34,35

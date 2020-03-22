@@ -35,8 +35,15 @@ subset x y = or $ (==) <$> x <*> y
 properSubset :: Eq a => [a] -> [a] -> Bool
 properSubset x y = intersect x y == x
 
+mutuallyExclusive :: Eq a => [a] -> [a] -> Bool
+mutuallyExclusive x y = (not . or) $ (==) <$> x <*> y
+
 addBaseLink :: ByteString -> ByteString
 addBaseLink = append "https://www.goodreads.com"
+
+outGenre :: [Genre] -> BookInfo -> Bool
+outGenre withoutGenre bookinfo =
+  withoutGenre `mutuallyExclusive` (catMaybes . bookGenre) bookinfo
 
 inGenresStrict :: [Genre] -> BookInfo -> Bool
 inGenresStrict genresToMatch bookinfo =
@@ -75,10 +82,14 @@ bookLinkToName :: ByteString -> Maybe ByteString
 bookLinkToName =
   fmap (pack . tail . dropWhile isNumber . unpack) . stripPrefix "/book/show/"
 
-reconStrict :: Link -> From -> To -> [Genre] -> IO [BookInfo]
-reconStrict link from to genresToMatch =
-  filter (inGenresStrict genresToMatch) <$> recon' link from to
+reconStrict :: Link -> From -> To -> [Genre] -> [Genre] -> IO [BookInfo]
+reconStrict link from to genresToMatch genresToUnMatch =
+  filter (outGenre genresToUnMatch)
+    .   filter (inGenresStrict genresToMatch)
+    <$> recon' link from to
 
-reconUnStrict :: Link -> From -> To -> [Genre] -> IO [BookInfo]
-reconUnStrict link from to genresToMatch =
-  filter (inGenresUnStrict genresToMatch) <$> recon' link from to
+reconUnStrict :: Link -> From -> To -> [Genre] -> [Genre] -> IO [BookInfo]
+reconUnStrict link from to genresToMatch genresToUnMatch =
+  filter (outGenre genresToUnMatch)
+    .   filter (inGenresUnStrict genresToMatch)
+    <$> recon' link from to

@@ -2,15 +2,20 @@
 
 module Recon
   ( recon
-  ) where
+  )
+where
 
-import Data.Maybe (catMaybes, fromMaybe)
-import Internal.Options (SearchOptions(..))
-import Internal.Types (BookInfo(..), Genre)
-import Options.Options (execSearchOptionsParser)
-import Printer.Printer (printBookInfoList)
-import Search.SearchRecon (addBaseLink, reconStrict, reconUnStrict, subset)
-import Data.ByteString.Lazy (ByteString)
+
+import           Data.Maybe                     ( fromMaybe )
+import           Internal.Options               ( SearchOptions(..) )
+import           Options.Options                ( execSearchOptionsParser )
+import           Printer.Printer                ( printBookInfoList )
+import           Search.SearchRecon             ( addBaseLink
+                                                , reconStrict
+                                                , reconUnStrict
+                                                , subset
+                                                )
+import           Data.ByteString.Lazy           ( ByteString )
 
 safeFrom :: SearchOptions -> Int
 safeFrom = fromMaybe 0 . from
@@ -22,7 +27,10 @@ safeLink :: SearchOptions -> ByteString
 safeLink = link
 
 safeGenres :: SearchOptions -> [ByteString]
-safeGenres = genres
+safeGenres = matchGenres
+
+safeNotGenres :: SearchOptions -> [ByteString]
+safeNotGenres = unmatchGenres
 
 safeStrictness :: SearchOptions -> Bool
 safeStrictness = strictness
@@ -30,11 +38,19 @@ safeStrictness = strictness
 recon :: IO ()
 recon = do
   options <- execSearchOptionsParser
-  let link' = safeLink options
-      from' = safeFrom options
-      to' = safeTo options
-      strictness' = safeStrictness options
-      genres' = safeGenres options
+
+  let link'          = safeLink options
+      from'          = safeFrom options
+      to'            = safeTo options
+      strictness'    = safeStrictness options
+      matchgenres'   = safeGenres options
+      unmatchgenres' = safeNotGenres options
+
+
   if strictness'
-    then printBookInfoList genres' =<< reconStrict link' from' to' genres'
-    else printBookInfoList genres' =<< reconUnStrict link' from' to' genres'
+    then
+      printBookInfoList matchgenres'
+        =<< reconStrict link' from' to' matchgenres' unmatchgenres'
+    else
+      printBookInfoList matchgenres'
+        =<< reconUnStrict link' from' to' matchgenres' unmatchgenres'

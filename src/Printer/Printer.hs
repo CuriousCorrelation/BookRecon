@@ -14,6 +14,7 @@ import           Internal.Types                 ( BookInfo(..)
 import           Search.SearchRecon             ( addBaseLink )
 import           Text.PrettyPrint.Boxes         ( Box
                                                 , (//)
+                                                , (/+/)
                                                 , (<+>)
                                                 , emptyBox
                                                 , left
@@ -45,6 +46,7 @@ boxText = text . fromLazyByteStringToString
 breaker :: Int -> Box
 breaker i = text $ Prelude.replicate i '─'
 
+breaker50 :: Box
 breaker50 = breaker 50
 
 boxBookInfo :: [Genre] -> BookInfo -> Box
@@ -52,9 +54,9 @@ boxBookInfo genresToMatch bookInfo =
   breaker50 // boxBookTitle // breaker50 // vcat
     left
     [ text "URL - " <+> boxBookURL
-    , (text "Top 5 Genres - " <+> boxBookTop5Genres)
+    , (text "Top 5 Genres" /+/ boxBookTop5Genres)
     <+> emptyBox 1 1
-    <+> (text "Matched Genres - " <+> boxBookMatchedGenres)
+    <+> (text "Matched Genres" /+/ boxBookMatchedGenres)
     ]
 
  where

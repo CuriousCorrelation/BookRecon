@@ -32,6 +32,10 @@ genresParser :: Parser [Genre]
 genresParser =
   many $ strOption (long "genres" <> short 'g' <> help "Genres to match.")
 
+ungenresParser :: Parser [Genre]
+ungenresParser = many
+  $ strOption (long "notgenres" <> short 'n' <> help "Genres NOT to match.")
+
 parseSearchOptions :: Parser SearchOptions
 parseSearchOptions =
   SearchOptions
@@ -40,6 +44,7 @@ parseSearchOptions =
     <*> toParser
     <*> strictnessParser
     <*> genresParser
+    <*> ungenresParser
 
 execSearchOptionsParser :: IO SearchOptions
 execSearchOptionsParser = execParser $ info
