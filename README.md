@@ -20,8 +20,13 @@ bookrecon -l https://www.goodreads.com/genres/most_read/fantasy
           -n series -n young-adult
 ```
 
+
 `-l` expects a link.
+
 `-f` expects a "search from" number.
+
 `-t` expects a "search to" number.
+
 `-g` expects the genres to match.
+
 `-n` expects genres not to match (completely exclude).
