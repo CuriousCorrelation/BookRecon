@@ -4,6 +4,19 @@
 
 Find the book that perfectly fits a list of genres.
 
+## Installation
+
+Best way is using [stack](https://docs.haskellstack.org/en/stable/README/).
+
+Installation instructions are in the [README](https://docs.haskellstack.org/en/stable/README/#how-to-install).
+
+```
+cd BookRecon
+stack setup
+stack build
+stack install
+```
+
 ## Usage
 
 Say you are browsing 'most read' section in 'fantasy' genre and you want to find a book that has 'urban fantasy' elements with some 'sci-fi' thrown in there but you don't want it to be a book in a 'series' or a 'young-adult' standalone.
@@ -12,7 +25,7 @@ The section has 20 books, you've gone through first 4 books but there are 16 mor
 
 So this is what you do:
 
-```sh
+```
 bookrecon -l https://www.goodreads.com/genres/most_read/fantasy
           -f 4
           -t 20
@@ -33,7 +46,7 @@ bookrecon -l https://www.goodreads.com/genres/most_read/fantasy
 
 The output will look like this
 
-```sh
+```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Processing...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -82,17 +95,6 @@ currently-reading
 2019
 fiction
 stephen-king
-──────────────────────────────────────────────────
-Mountain of Mars (Starship's Mage, #8)
-──────────────────────────────────────────────────
-URL -  https://www.goodreads.com/book/show/48835662-mountain-of-mars
-Top 5 Genres        Matched Genres
-
-currently-reading   fiction
-to-read
-science-fiction
-kindle-unlimited
-fantasy
 ──────────────────────────────────────────────────
 Battle Bond (Death Before Dragons, #2)
 ──────────────────────────────────────────────────
