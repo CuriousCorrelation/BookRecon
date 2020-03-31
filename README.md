@@ -1,4 +1,4 @@
-# HBookRecon
+# BookRecon
 
 ## A book finder written in Haskell.
 
@@ -30,3 +30,89 @@ bookrecon -l https://www.goodreads.com/genres/most_read/fantasy
 `-g` expects the genres to match.
 
 `-n` expects genres not to match (completely exclude).
+
+The output will look like this
+
+```sh
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Processing...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Found link for -
+"Smoke Bitten (Mercy Thompson, #12)"
+"Circe"
+"Magical Midlife Madness (Leveling Up #1)"
+"The Cruel Prince (The Folk of the Air, #1)"
+"Harry Potter and the Cursed Child: Parts One and Two (Harry Potter, #8)"
+"A Court of Mist and Fury (A Court of Thorns and Roses, #2)"
+"Red Queen (Red Queen, #1)"
+...
+...
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Processing - https://www.goodreads.com/book/show/44571368-smoke-bitten
+Processing - https://www.goodreads.com/book/show/35959740-circe
+Processing - https://www.goodreads.com/book/show/50489197-magical-midlife-madness
+Processing - https://www.goodreads.com/book/show/26032825-the-cruel-prince
+Processing - https://www.goodreads.com/book/show/29056083-harry-potter-and-the-cursed-child
+Processing - https://www.goodreads.com/book/show/17927395-a-court-of-mist-and-fury
+Processing - https://www.goodreads.com/book/show/22328546-red-queen
+...
+...
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Finding genres from - https://www.goodreads.com/work/shelves/53043399
+Finding genres from - https://www.goodreads.com/work/shelves/75461078
+Finding genres from - https://www.goodreads.com/work/shelves/69176712
+Finding genres from - https://www.goodreads.com/work/shelves/60021532
+Finding genres from - https://www.goodreads.com/work/shelves/42090179
+Finding genres from - https://www.goodreads.com/work/shelves/25126749
+Finding genres from - https://www.goodreads.com/work/shelves/51396954
+...
+...
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+──────────────────────────────────────────────────
+Elevation
+──────────────────────────────────────────────────
+URL -  https://www.goodreads.com/book/show/38355410-elevation
+Top 5 Genres        Matched Genres
+
+to-read             fiction
+currently-reading
+2019
+fiction
+stephen-king
+──────────────────────────────────────────────────
+Mountain of Mars (Starship's Mage, #8)
+──────────────────────────────────────────────────
+URL -  https://www.goodreads.com/book/show/48835662-mountain-of-mars
+Top 5 Genres        Matched Genres
+
+currently-reading   fiction
+to-read
+science-fiction
+kindle-unlimited
+fantasy
+──────────────────────────────────────────────────
+Battle Bond (Death Before Dragons, #2)
+──────────────────────────────────────────────────
+URL -  https://www.goodreads.com/book/show/51883032-battle-bond
+Top 5 Genres        Matched Genres
+
+currently-reading         fiction
+to-read             urban-fantasy
+urban-fantasy
+fantasy
+dragons
+──────────────────────────────────────────────────
+The Obelisk Gate (The Broken Earth, #2)
+──────────────────────────────────────────────────
+URL -  https://www.goodreads.com/book/show/26228034-the-obelisk-gate
+Top 5 Genres        Matched Genres
+
+to-read             fiction
+currently-reading
+fantasy
+fiction
+science-fiction
+```
