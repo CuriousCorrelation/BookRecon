@@ -19,7 +19,7 @@ stack install
 
 ## Usage
 
-Say you are browsing 'most read' section in 'fantasy' genre and you want to find a book that has 'urban fantasy' elements with some 'sci-fi' thrown in there but you don't want it to be a book in a 'series' or a 'young-adult' standalone.
+Say you are on Goodreads browsing 'most read' section in 'fantasy' genre and you want to find a book that has 'urban fantasy' elements with some 'sci-fi' thrown in there but you don't want it to be a book in a 'series' or a 'young-adult' standalone.
 
 The section has 20 books, you've gone through first 4 books but there are 16 more to go!
 
