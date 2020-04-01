@@ -5,7 +5,7 @@ module Recon
   )
 where
 
-
+import           GHC.IO.Encoding                ( setLocaleEncoding )
 import           Data.Maybe                     ( fromMaybe )
 import           Internal.Options               ( SearchOptions(..) )
 import           Options.Options                ( execSearchOptionsParser )
@@ -37,6 +37,7 @@ safeStrictness = strictness
 
 recon :: IO ()
 recon = do
+  setLocaleEncoding
   options <- execSearchOptionsParser
 
   let link'          = safeLink options
