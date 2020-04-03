@@ -1,7 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- |
-
 module Search.BookLinks
   ( getBookLinks
   , getBookTitles
@@ -14,11 +13,11 @@ import           Data.ByteString.Lazy          as BL
                                                 , isPrefixOf
                                                 , unpack
                                                 )
-import           Text.HTML.TagSoup.Match
-import           Text.HTML.TagSoup
-import           Network.HTTP.Conduit           ( simpleHttp )
-import           Internal.Types                 ( Link )
 import           Data.List                      ( nub )
+import           Internal.Types                 ( Link )
+import           Network.HTTP.Conduit           ( simpleHttp )
+import           Text.HTML.TagSoup
+import           Text.HTML.TagSoup.Match
 
 bookLinkCheck :: Tag ByteString -> Bool
 bookLinkCheck = isTagOpenName "a"
@@ -37,9 +36,13 @@ getBookLinks link =
   nub . fixUpBookLinks . parseTags <$> simpleHttp (w2c <$> BL.unpack link)
 
 -- | --
-
 bookTitleCheck :: Tag ByteString -> Bool
-bookTitleCheck = tagOpen (== "img") (elem ("class", "bookImage"))
+bookTitleCheck = tagOpen
+  (== "img")
+  (\a ->
+    elem ("class", "bookImage") a
+      || elem ("class", "gr-box--withShadow responsiveBook__img") a
+  )
 
 filterBookTitles :: [Tag ByteString] -> [ByteString]
 filterBookTitles = fmap (fromAttrib "alt") . filter bookTitleCheck
