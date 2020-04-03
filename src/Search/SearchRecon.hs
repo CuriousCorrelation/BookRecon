@@ -25,7 +25,6 @@ import           Search.BookLinks               ( getBookLinks
                                                 )
 import           Search.GenreLinks              ( getGenreLinks )
 import           Search.ShelfLinks              ( getShelfLinks )
-import           Debug.Trace                    ( trace )
 
 type From = Int
 
