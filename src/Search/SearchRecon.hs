@@ -64,7 +64,7 @@ recon' link from to = displayConsoleRegions $ do
 
   progressBar <- newProgressBar def
     { pgWidth        = 100
-    , pgOnCompletion = Just "Printing results (this may take a few moments)."
+    , pgOnCompletion = Just "Filtering results (this may take a few moments)."
     , pgTotal        = fromIntegral $ to' - from'
     }
 
