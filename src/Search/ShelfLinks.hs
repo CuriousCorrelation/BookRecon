@@ -7,6 +7,9 @@ module Search.ShelfLinks
   )
 where
 
+import           System.Console.AsciiProgress   ( ProgressBar
+                                                , tick
+                                                )
 import           Data.ByteString.Internal       ( w2c )
 import           Data.Word8                    as W8
 import           Data.ByteString.Lazy          as BL
@@ -44,7 +47,7 @@ fixUpShelfLinks =
         )
     . filterEditionLinks
 
-getShelfLinks :: Link -> IO ByteString
-getShelfLinks link = do
-  putStrLn $ "Processing - " ++ (w2c <$> BL.unpack link)
+getShelfLinks :: ProgressBar -> Link -> IO ByteString
+getShelfLinks pb link = do
+  tick pb
   fixUpShelfLinks . parseTags <$> simpleHttp (w2c <$> BL.unpack link)

@@ -28,6 +28,7 @@ dependencies:
 - word8
 - parallel-io
 - boxes
+- ascii-progress
 
 library:
   source-dirs: src

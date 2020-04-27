@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6257ec5d3253b3ede7062490e5639ee40e83db403d9481fba91eb14a92942c66
+-- hash: c5b25f3294ca0f10f2bbf77dadc880175c502b7df800449026960b98adf5a0f4
 
 name:           HBookRecon
 version:        0.1.0.0
@@ -41,7 +41,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      ascii-progress
+    , base >=4.7 && <5
     , boxes
     , bytestring
     , http-conduit
@@ -60,6 +61,7 @@ executable bookrecon
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       HBookRecon
+    , ascii-progress
     , base >=4.7 && <5
     , boxes
     , bytestring
@@ -80,6 +82,7 @@ test-suite HBookRecon-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       HBookRecon
+    , ascii-progress
     , base >=4.7 && <5
     , boxes
     , bytestring

@@ -51,14 +51,15 @@ breaker50 = breaker 50
 
 boxBookInfo :: [Genre] -> BookInfo -> Box
 boxBookInfo genresToMatch bookInfo =
-  breaker50 // boxBookTitle // breaker50 // vcat
-    left
-    [ text "URL - " <+> boxBookURL
-    , (text "Top 5 Genres" /+/ boxBookTop5Genres)
-    <+> emptyBox 1 1
-    <+> (text "Matched Genres" /+/ boxBookMatchedGenres)
-    ]
-
+  (breaker50 // boxBookTitle // breaker50)
+    //  (text "URL - " <+> boxBookURL)
+    /+/ (   (text "Top 5 Genres" // text "____________" // boxBookTop5Genres)
+        <+> emptyBox 1 1
+        <+> (  text "Matched Genres"
+            // text "______________"
+            // boxBookMatchedGenres
+            )
+        )
  where
   boxBookURL        = boxText $ addBaseLink $ getBookURL bookInfo
   boxBookTitle      = boxText $ getBookTitle bookInfo

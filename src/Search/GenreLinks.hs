@@ -7,6 +7,9 @@ module Search.GenreLinks
   )
 where
 
+import           System.Console.AsciiProgress   ( ProgressBar
+                                                , tick
+                                                )
 import           Data.ByteString.Internal       ( w2c )
 import           Data.ByteString.Lazy          as BL
                                                 ( ByteString
@@ -34,7 +37,7 @@ filterGenreLinks =
   fmap (stripPrefix "/genres/" . toLowerByteString . fromAttrib "href")
     . filter genreLinkCheck
 
-getGenreLinks :: Link -> IO [Maybe ByteString]
-getGenreLinks link = do
-  putStrLn $ "Finding genres from - " ++ (w2c <$> BL.unpack link)
+getGenreLinks :: ProgressBar -> Link -> IO [Maybe ByteString]
+getGenreLinks pb link = do
+  tick pb
   filterGenreLinks . parseTags <$> simpleHttp (w2c <$> BL.unpack link)

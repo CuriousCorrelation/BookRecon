@@ -3,6 +3,7 @@
 -- |
 module Search.SearchRecon where
 
+import           System.Console.AsciiProgress
 import           Control.Concurrent.ParallelIO.Global
                                                 ( parallel
                                                 , stopGlobalPool
@@ -55,22 +56,35 @@ inGenresUnStrict genresToMatch bookinfo =
   genresToMatch `subset` (catMaybes . bookGenre) bookinfo
 
 recon' :: Link -> From -> To -> IO [BookInfo]
-recon' link from to = do
+recon' link from to = displayConsoleRegions $ do
+
+
   let from' = if to > from then from else to
       to'   = if to > from then to - from else from - to
-  putStrLn "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  putStrLn "Processing..."
-  bookLinks  <- take to' . drop from' <$> getBookLinks link
+
+  progressBar <- newProgressBar def
+    { pgWidth        = 100
+    , pgOnCompletion = Just "Printing results (this may take a few moments)."
+    , pgTotal        = fromIntegral $ to' - from'
+    }
+
+  bookLinks <- take to' . drop from' <$> getBookLinks link
+  tick progressBar
+
   bookTitles <- take to' . drop from' <$> getBookTitles link
-  putStrLn "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  putStrLn "Found link for - "
-  mapM_ print bookTitles
-  putStrLn "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  shelfLinks <- parallel (getShelfLinks . addBaseLink <$> bookLinks)
-  putStrLn "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  genres <- parallel (getGenreLinks . addBaseLink <$> shelfLinks)
-  putStrLn "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  tick progressBar
+
+  shelfLinks <- parallel (getShelfLinks progressBar . addBaseLink <$> bookLinks)
+  tick progressBar
+
+  genres <- parallel (getGenreLinks progressBar . addBaseLink <$> shelfLinks)
+  tick progressBar
+
   stopGlobalPool
+
+  tick progressBar
+  complete progressBar
+
   return $ zipWith3 BookInfo bookTitles bookLinks genres
 
 bookLinkToName :: ByteString -> Maybe ByteString
